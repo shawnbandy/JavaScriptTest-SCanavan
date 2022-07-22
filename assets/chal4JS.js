@@ -119,10 +119,15 @@ function decreaseTimer(){
         timer -= .1;
         timerDisplay.textContent = Math.round(timer) + " seconds left";
 
-        if (timer == 0){
+        if (timer < 0){
+            timerDisplay.textContent = 0 + " seconds left";
+        }
+
+        if (timer == 0 || timer < 0){
             clearInterval(timeInterval);
             displayHighScore();
         }
+
 
     }, 100);
 }
