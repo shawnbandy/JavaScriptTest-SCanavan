@@ -1,5 +1,5 @@
 * {
-    background-color: 
+    background-color: #FAF9F6; 
 }
 
 body {
@@ -43,6 +43,11 @@ body {
 
 }
 
+#answers p:hover {
+    opacity: 80%;
+    cursor: pointer;
+}
+
 #startButton {
     background-color: lightcoral;
     font-weight: bolder;
@@ -58,6 +63,8 @@ body {
 #startButton:hover {
     opacity: 80%;
 }
+
+
 
 @media screen and (max-width: 768px) {
     header {
