@@ -64,6 +64,12 @@ body {
     opacity: 80%;
 }
 
+#description {
+    text-align: center;
+    font-family: monospace;
+    font-size: larger;
+}
+
 
 
 @media screen and (max-width: 768px) {
