@@ -7,19 +7,20 @@ var answerPrompt = document.getElementById("answers");
 var startButton = document.getElementById("startButton");
 var timerDisplay = document.getElementById("timer");
 var descriptionEl = document.getElementById("description");
+var rightOrWrongDisplay = document.getElementById("rightOrWrong");
 
 
 //*this will be the question bank that is displayed to the user
 var questionBank = [
-    "question 2", 
-    "question 3", 
-    "question 4",
-    "question 5", 
-    "question 6", 
-    "question 7",    
-    "question 8", 
-    "question 9", 
-    "question 10",
+    "What does 'document.getElementByID' do?", 
+    "What does the expression 'if (x == 12) {var y = 10;}' do? (Assume x is already a declared number)", 
+    "What does '.textContent' do?",
+    "What does '.setattribute' do?", 
+    "Which expression would add y to x? Assume both variables are numbers.", 
+    "How would you create an event listener for a mouse click?",    
+    "How would you increase var i by 1 until it reaches 10 and log the numbers to the console?", 
+    "How would you declare a function expression?", 
+    "How would you declare a function expression?",
 ];
 //*this is the question index that is used later
 var questionIndex = 0;
@@ -27,33 +28,32 @@ var questionIndex = 0;
 //*this is the bank of all the answers possible
 var completeAnswerBank = [
     // ["answer 1", "answer2", "answer 3", "AB4"],
-    ["question2answer 1", "answer2", "answer 3", "AB4"],
-    ["question3answer 1", "answer2", "answer 3", "AB4"],
-    ["question4answer 1", "answer2", "answer 3", "AB4"],
-    ["question5answer 1", "answer2", "answer 3", "AB4"],
-    ["question6answer 1", "answer2", "answer 3", "AB4"],
-    ["question7answer 1", "answer2", "answer 3", "AB4"],
-    ["question8answer 1", "answer2", "answer 3", "AB4"],
-    ["question9answer 1", "answer2", "answer 3", "AB4"],
-    ["question10answer 1", "answer2", "answer 3", "AB4"],
+    ["Nothing", "Formats the HTML document", "Sets target object to specified ID", "Returns an element object representing the element whose ID was matched"],
+    ["Nothing", "Returns an error", "Sets y to 10 when X is equal to 12", "Sets X equal to 12, then sets y to 10"],
+    ["Nothing", "Sets text content", "sets the inner HTML", "sets the outer HTML"],
+    ["Nothing", "Sets a value to the specified element", "Sets an element to the specified value", "Gets the current value of an attribute"],
+    ["None of these", "x = y", "x -= y", "x += y"],
+    ["None of these", ".addEventListener('click')", ".eventListener('click')", ".listenEvent('click')"],
+    ["None of these", "(for var i = 0; i < 11; i++){console.log(i)}", "(for var i = 0; i < 10; i++){console.log(i)}", "(for var i = 0; i < 11; i--){console.log(i)}"],
+    ["None of these", "var x = function(a, b)", "function x(a, b)", "function(a, b) = x"],
+    ["None of these", "var x = function(a, b)", "function x(a, b)", "function(a, b) = x"],
 ];
 //*index for the answerbank
 var completeAnswerIndex = 0;
 
 //*array of all the correct answers
 var correctAnswerArr = [
-    "answer 1",
-    "question2answer 1",
-    "question3answer 1",
-    "question4answer 1",
-    "answer 5",
-    "question6answer 1",
-    "question7answer 1",
-    "question8answer 1",    
-    "answer 9",
-    "question10answer 1",
+    "Containers for storing data",
+    "Returns an element object representing the element whose ID was matched",
+    "Sets y to 10 when X is equal to 12",
+    "Sets text content",
+    "Nothing",
+    "x += y",
+    ".addEventListener('click')",
+    "(for var i = 0; i < 11; i++){console.log(i)}",    
+    "var x = function(a, b)",
+    "function x(a, b)",
 ]
-
 
 //*respective index
 var correctAnswersIndex = 0;
@@ -90,10 +90,12 @@ function takeTest(){
         if (selectedAnswer == correctAnswerArr[correctAnswersIndex]){
             score++;
             correctAnswersIndex++;
+            rightOrWrongDisplay.textContent = "Correct!"
         }else { 
             //*subtract time if wrong
             timer -= 5;
             correctAnswersIndex++; 
+            rightOrWrongDisplay.textContent = "Incorrect!"
         }
     
         //*cycles through the questions after an answer has been selected
@@ -113,7 +115,7 @@ function takeTest(){
 }
 
 
-//*function sill decrease the timer variable every 1000ms and display time remaining to user
+//*function sill decrease the timer variable every 100ms and display time remaining to user
 function decreaseTimer(){
     var timeInterval = setInterval(function(){
         timer -= .1;
