@@ -10,6 +10,7 @@ var descriptionEl = document.getElementById("description");
 var rightOrWrongDisplay = document.getElementById("rightOrWrong");
 var highScoreDisplay = document.getElementById("highScorePage");
 var scoreReport = document.getElementById("score");
+var globalScoreReport = document.getElementById("globalScore");
 
 
 //*this will be the question bank that is displayed to the user
@@ -62,12 +63,13 @@ var correctAnswersIndex = 0;
 
 //*tally of the score
 var score = 0;
+var globalScore = 0;
 
 //*time given to user to take test
 var timer = 0;
 var wrongAnswer = false;
 
-//*this will start the text opon clicking the button, which hides the button and displays the test
+//*this will start the text upon clicking the button, which hides the button and displays the test
 //*then takeTest function is ran
 startButton.addEventListener("click" , function(event){
 
@@ -143,7 +145,13 @@ function displayHighScore(){
     quizSpace.setAttribute("style", "display: none");
     document.querySelector("header").setAttribute("style", "display: none");
 
-    highScoreDisplay.setAttribute("style", "display: flex;")
-    scoreReport.textContent = " " + score + " out of 10."
+    highScoreDisplay.setAttribute("style", "display: flex;");
+    scoreReport.textContent = score + " out of 10.";
+    globalScoreReport.textContent = "Here is the current high score: " + globalScore;
+
+    if (score > globalScore){
+        globalScore = score;
+        localStorage.setItem("globalScore", globalScore);
+    }
 
 }
