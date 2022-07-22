@@ -76,6 +76,19 @@ body {
     font-size: larger;
 }
 
+#highScorePage {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#score {
+    font-size: 30px;
+}
+
 
 
 @media screen and (max-width: 768px) {

@@ -8,6 +8,8 @@ var startButton = document.getElementById("startButton");
 var timerDisplay = document.getElementById("timer");
 var descriptionEl = document.getElementById("description");
 var rightOrWrongDisplay = document.getElementById("rightOrWrong");
+var highScoreDisplay = document.getElementById("highScorePage");
+var scoreReport = document.getElementById("score");
 
 
 //*this will be the question bank that is displayed to the user
@@ -62,7 +64,7 @@ var correctAnswersIndex = 0;
 var score = 0;
 
 //*time given to user to take test
-var timer = 60;
+var timer = 0;
 var wrongAnswer = false;
 
 //*this will start the text opon clicking the button, which hides the button and displays the test
@@ -107,6 +109,7 @@ function takeTest(){
             answerPrompt.children[i].textContent = completeAnswerBank[completeAnswerIndex][i];
         }
         completeAnswerIndex++;
+        
     
     });
 
@@ -134,3 +137,13 @@ function decreaseTimer(){
     }, 100);
 }
 
+function displayHighScore(){
+    startButton.setAttribute("style", "display: none");
+    descriptionEl.setAttribute("style", "display: none");
+    quizSpace.setAttribute("style", "display: none");
+    document.querySelector("header").setAttribute("style", "display: none");
+
+    highScoreDisplay.setAttribute("style", "display: flex;")
+    scoreReport.textContent = " " + score + " out of 10."
+
+}
