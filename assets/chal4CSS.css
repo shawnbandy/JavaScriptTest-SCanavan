@@ -1,7 +1,13 @@
+* {
+    background-color: 
+}
+
 body {
     display: flex;
     flex-direction: column;
     height: 960px;
+    justify-content: center;
+    align-items: center;
 }
 
 #quizSpace {
@@ -12,6 +18,7 @@ body {
     height: 100%;
     width: 100%;
     flex-direction: column;
+    display: none;
 }
 
 #quizSpace div {
@@ -25,7 +32,7 @@ body {
     align-items: center;
 }
 
-.questions p {
+#answers p {
     display: flex;
     background-color: lightgreen;
     width: 50%;
@@ -34,6 +41,22 @@ body {
     justify-content: center;
     border-radius: 25px;
 
+}
+
+#startButton {
+    background-color: lightcoral;
+    font-weight: bolder;
+    font-size: larger;
+    cursor: pointer;
+    width: 20%;
+    height: 20%;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#startButton:hover {
+    opacity: 80%;
 }
 
 @media screen and (max-width: 768px) {
