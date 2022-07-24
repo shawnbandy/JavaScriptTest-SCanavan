@@ -13,6 +13,7 @@ var scoreReport = document.getElementById("score");
 var globalScoreReport = document.getElementById("globalScore");
 var beatEl = document.getElementById("beat");
 var scoreUpdateEl =  document.getElementById("scoreUpdate");
+var questionNumberEl = document.getElementById("questionNumber");
 
 //*this will be the question bank that is displayed to the user
 var questionBank = [
@@ -26,8 +27,9 @@ var questionBank = [
     "How would you declare a function expression?", 
     "How would you declare a function expression?",
 ];
-//*this is the question index that is used later
+//*this is the question index that is used later, and question number which is displayed for the user
 var questionIndex = 0;
+var questionNumber = 1;
 
 //*this is the bank of all the answers possible
 var completeAnswerBank = [
@@ -58,8 +60,7 @@ var correctAnswerArr = [
     "var x = function(a, b)",
     "function x(a, b)",
 ]
-
-//*respective index
+//*its respective index
 var correctAnswersIndex = 0;
 
 //*tally of the score
@@ -67,7 +68,7 @@ var score = 0;
 var globalScore = 0;
 
 //*time given to user to take test
-var timer = 0;
+var timer = 60;
 var wrongAnswer = false;
 
 //*this will start the text upon clicking the button, which hides the button and displays the test
@@ -88,6 +89,12 @@ function takeTest(){
 
     //*listens for an answer to be clicked 
     answerPrompt.addEventListener("click", function(event){
+
+
+        //*if statement that will check, at the start of the function, to see if quiz is done and will display ending screen 
+        if(questionNumber == 10){
+            displayHighScore();
+        }
        
         //*grabs the answer's text and logs it into a var. checks to see if correct answer was selected, which then increases score and the correctAnswerIndex
         //*index is increased to align the correct answer with the answers given
@@ -104,6 +111,8 @@ function takeTest(){
         }
     
         //*cycles through the questions after an answer has been selected
+        questionNumber++;
+        questionNumberEl.textContent = "Question Number " + questionNumber;
         questionPrompt.textContent = questionBank[questionIndex];
         questionIndex++;
         
@@ -111,8 +120,7 @@ function takeTest(){
         for(var i = 0; i < 4; i++){
             answerPrompt.children[i].textContent = completeAnswerBank[completeAnswerIndex][i];
         }
-        completeAnswerIndex++;
-        
+        completeAnswerIndex++;        
     
     });
 
