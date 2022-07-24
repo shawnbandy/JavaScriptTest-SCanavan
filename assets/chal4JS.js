@@ -11,7 +11,8 @@ var rightOrWrongDisplay = document.getElementById("rightOrWrong");
 var highScoreDisplay = document.getElementById("highScorePage");
 var scoreReport = document.getElementById("score");
 var globalScoreReport = document.getElementById("globalScore");
-
+var beatEl = document.getElementById("beat");
+var scoreUpdateEl =  document.getElementById("scoreUpdate");
 
 //*this will be the question bank that is displayed to the user
 var questionBank = [
@@ -152,6 +153,8 @@ function displayHighScore(){
     if (score > globalScore){
         globalScore = score;
         localStorage.setItem("globalScore", globalScore);
-    }
+        beatEl.textContent = "You beat the high score!";
+        scoreUpdateEl.setAttribute("style", "display: flex");
+    } 
 
 }
