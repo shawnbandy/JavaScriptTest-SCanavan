@@ -25,7 +25,7 @@ var questionBank = [
     "How would you create an event listener for a mouse click?",    
     "How would you increase var i by 1 until it reaches 10 and log the numbers to the console?", 
     "How would you declare a function expression?", 
-    "How would you declare a function expression?",
+    "How would you make a function declaration?",
 ];
 //*this is the question index that is used later, and question number which is displayed for the user
 var questionIndex = 0;
@@ -68,10 +68,10 @@ var score = 0;
 var globalScore = 0;
 
 //*time given to user to take test
-var timer = 60;
+var timer = 50;
 var wrongAnswer = false;
 
-//*this will start the text upon clicking the button, which hides the button and displays the test
+//*this will start the test upon clicking the button, which hides the button and displays the test
 //*then takeTest function is ran
 startButton.addEventListener("click" , function(event){
 
@@ -84,7 +84,7 @@ startButton.addEventListener("click" , function(event){
 
 });
 
-//*master function for the test
+//*function for the test
 function takeTest(){
 
     //*listens for an answer to be clicked 
@@ -93,7 +93,8 @@ function takeTest(){
 
         //*if statement that will check, at the start of the function, to see if quiz is done and will display ending screen 
         if(questionNumber == 10){
-            displayHighScore();
+            timer = 0;
+            return;
         }
        
         //*grabs the answer's text and logs it into a var. checks to see if correct answer was selected, which then increases score and the correctAnswerIndex
@@ -110,7 +111,7 @@ function takeTest(){
             rightOrWrongDisplay.textContent = "Incorrect!"
         }
     
-        //*cycles through the questions after an answer has been selected
+        //*cycles through the questions and increases question number after an answer has been selected
         questionNumber++;
         questionNumberEl.textContent = "Question Number " + questionNumber;
         questionPrompt.textContent = questionBank[questionIndex];
@@ -129,6 +130,7 @@ function takeTest(){
 }
 
 
+
 //*function sill decrease the timer variable every 100ms and display time remaining to user
 function decreaseTimer(){
     var timeInterval = setInterval(function(){
@@ -144,6 +146,8 @@ function decreaseTimer(){
             displayHighScore();
         }
 
+        console.log(timer);
+
 
     }, 100);
 }
@@ -157,6 +161,7 @@ function displayHighScore(){
     highScoreDisplay.setAttribute("style", "display: flex;");
     scoreReport.textContent = score + " out of 10.";
     globalScoreReport.textContent = "Here is the current high score: " + globalScore;
+    localStorage.setItem("score", score);
 
     if (score > globalScore){
         globalScore = score;
