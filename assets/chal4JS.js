@@ -129,8 +129,6 @@ function takeTest(){
     decreaseTimer();
 }
 
-
-
 //*function sill decrease the timer variable every 100ms and display time remaining to user
 function decreaseTimer(){
     var timeInterval = setInterval(function(){
@@ -160,7 +158,7 @@ function displayHighScore(){
 
     highScoreDisplay.setAttribute("style", "display: flex;");
     scoreReport.textContent = score + " out of 10.";
-    globalScoreReport.textContent = "Here is the current high score: " + globalScore;
+    globalScoreReport.textContent = "Here is the current high score: " + localStorage.getItem("globalScore");
     localStorage.setItem("score", score);
 
     if (score > globalScore){
