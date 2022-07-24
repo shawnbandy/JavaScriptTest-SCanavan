@@ -92,10 +92,7 @@ function takeTest(){
 
 
         //*if statement that will check, at the start of the function, to see if quiz is done and will display ending screen 
-        if(questionNumber == 10){
-            timer = 0;
-            return;
-        }
+
        
         //*grabs the answer's text and logs it into a var. checks to see if correct answer was selected, which then increases score and the correctAnswerIndex
         //*index is increased to align the correct answer with the answers given
@@ -109,6 +106,11 @@ function takeTest(){
             timer -= 5;
             correctAnswersIndex++; 
             rightOrWrongDisplay.textContent = "Incorrect!"
+        }
+
+        if(questionNumber == 10){
+            timer = 0;
+            return;
         }
     
         //*cycles through the questions and increases question number after an answer has been selected
@@ -161,7 +163,7 @@ function displayHighScore(){
     globalScoreReport.textContent = "Here is the current high score: " + localStorage.getItem("globalScore");
     localStorage.setItem("score", score);
 
-    if (score > globalScore){
+    if (score > localStorage.getItem("globalScore")){
         globalScore = score;
         localStorage.setItem("globalScore", globalScore);
         beatEl.textContent = "You beat the high score!";
