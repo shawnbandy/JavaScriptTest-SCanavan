@@ -34,23 +34,49 @@
 
             <h2 id="rightOrWrong"></h2>
 
+
+
         </section>
         
-        <div id="highScorePage">
-            <p style="font-size: 30px;">Great Job! Here is your score: </p>
-            <p id="score">Text</p>
-            <p id="globalScore"></p>
-            <p id="beat">You did not beat them</p>
-            <p id="scoreUpdate">Updating new High Score. It is now yours!</p>
-        </div>
+
+        <section  id="highScorePage">
+            <div>
+                <p style="font-size: 30px;">Great Job! Here is your score: </p>
+                <p id="score">Text</p>
+                <p id="globalScore"></p>
+                <p id="beat">You did not beat them</p>
+                <p id="scoreUpdate">Updating new High Score. It is now yours!</p>
+            </div>
+
+            <table id="leaderboard">
+                <tr>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+                <tr id="firstPlace">
+                    <td>Name 1</td>
+                    <td>Score 1</td>
+                </tr>
+                <tr id="secondPlace">
+                    <td>Name 2</td>
+                    <td>Score 2</td>
+                </tr>
+                <tr id="thirdPlace">
+                    <td>Name 3</td>
+                    <td>Score 3</td>
+                </tr>
+
+            </table>
+
+            <button id="playAgain">Play Again?</button>
+        </section>
 
         <div id="description">
             <p>The test is 10 multiple choice answers. You have 60 seconds to complete all questions.</p>
             <p>If you answer incorrectly, 5 seconds will be subtracted from your time.</p>
             <p>Your final score will be displayed at the end. Good luck!</p>
         </div>
-
-
+        
 
         <script src="assets/chal4JS.js"></script>
     </body>

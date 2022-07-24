@@ -95,6 +95,28 @@ body {
     justify-content: center;
 }
 
+#leaderboard {
+    border-collapse: collapse;
+    width: 50%;
+    background-color: darkgoldenrod;
+}
+
+#playAgain {
+    background-color: lightcoral;
+    margin-top: 30px;
+    font-weight: bolder;
+    font-size: larger;
+    cursor: pointer;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#playAgain:hover {
+    opacity: 80%;
+}
 
 
 @media screen and (max-width: 768px) {

@@ -14,13 +14,18 @@ var globalScoreReport = document.getElementById("globalScore");
 var beatEl = document.getElementById("beat");
 var scoreUpdateEl =  document.getElementById("scoreUpdate");
 var questionNumberEl = document.getElementById("questionNumber");
+var firstPlaceDisplay = document.getElementById("firstPlace")
+var secondPlaceDisplay = document.getElementById("secondPlace")
+var thirdPlaceDisplay = document.getElementById("thirdPlace")
+
+var playAgainButton = document.getElementById("playAgain");
 
 //*this will be the question bank that is displayed to the user
 var questionBank = [
     "What does 'document.getElementByID' do?", 
     "What does the expression 'if (x == 12) {var y = 10;}' do? (Assume x is already a declared number)", 
     "What does '.textContent' do?",
-    "What does '.setattribute' do?", 
+    "What does '.setattribute' do?", //*this is intentionlly left NOT in camelCase
     "Which expression would add y to x? Assume both variables are numbers.", 
     "How would you create an event listener for a mouse click?",    
     "How would you increase var i by 1 until it reaches 10 and log the numbers to the console?", 
@@ -69,7 +74,6 @@ var globalScore = 0;
 
 //*time given to user to take test
 var timer = 50;
-var wrongAnswer = false;
 
 //*this will start the test upon clicking the button, which hides the button and displays the test
 //*then takeTest function is ran
@@ -86,6 +90,7 @@ startButton.addEventListener("click" , function(event){
 
 //*function for the test
 function takeTest(){
+
 
     //*listens for an answer to be clicked 
     answerPrompt.addEventListener("click", function(event){
@@ -132,6 +137,7 @@ function takeTest(){
 }
 
 //*function sill decrease the timer variable every 100ms and display time remaining to user
+//*when timer reaches 0, the final screen is displayed
 function decreaseTimer(){
     var timeInterval = setInterval(function(){
         timer -= .1;
@@ -152,6 +158,8 @@ function decreaseTimer(){
     }, 100);
 }
 
+
+var userName = ""
 function displayHighScore(){
     startButton.setAttribute("style", "display: none");
     descriptionEl.setAttribute("style", "display: none");
@@ -168,6 +176,65 @@ function displayHighScore(){
         localStorage.setItem("globalScore", globalScore);
         beatEl.textContent = "You beat the high score!";
         scoreUpdateEl.setAttribute("style", "display: flex");
+        var userName = prompt("Congratulations! Please enter your initials for the leaderboard");
     } 
+    leaderboard();
 
+    playAgainButton.addEventListener("click", function(){
+        document.location.reload(); 
+    })
+
+}
+
+
+var firstPlace = 0;
+var secondPlace = 0;
+var thirdPlace = 0;
+var firstPlaceUser = "JOE"
+var secondPlaceUser = "BOA"
+var thirdPlaceUser = "SIP"
+
+function leaderboard(){
+
+    var threeCharUserName;
+    if (userName.length > 3){
+        for (var i = 0; i < 4; i++){
+            threeCharUserName += userName[i];
+        }
+        return threeCharUserName;
+    }else if (userName.length == 0) {
+        threeCharUserName = "AAA"
+    }else {
+        threeCharUserName = userName;
+    }
+
+    switch (score){
+        case score > firstPlace :
+            thirdPlace = secondPlace;
+                thirdPlaceUser = secondPlaceUser;
+            secondPlace = firstPlace;
+                secondPlaceUser = firstPlaceUser;
+            firstPlace = score;
+                firstPlaceUser = threeCharUserName;
+            break;
+        case score > secondPlace :
+            thirdPlace = secondPlace;
+                thirdPlaceUser = secondPlaceUser;
+            secondPlace = score;
+                secondPlaceUser = threeCharUserName;
+            break;
+        case score > thirdPlace :
+            thirdPlace = score;
+                thirdPlaceUser = threeCharUserName;
+            break;
+    }
+
+    firstPlaceDisplay.children[0].textContent = firstPlaceUser;
+    firstPlaceDisplay.children[1].textContent = firstPlace;
+    secondPlaceDisplay.children[0].textContent = secondPlaceUser;
+    secondPlaceDisplay.children[1].textContent = secondPlace;
+    thirdPlaceDisplay.children[0].textContent = thirdPlaceUser;
+    thirdPlaceDisplay.children[1].textContent = thirdPlace;
+
+    
 }
