@@ -1,5 +1,5 @@
 * {
-    background-color: #FAF9F6; 
+    background-color:rgb(239, 244, 248);
 }
 
 body {
@@ -11,7 +11,7 @@ body {
 }
 
 #quizSpace {
-    background-color: lightblue;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,29 +22,44 @@ body {
 }
 
 #quizSpace div {
-    background-color: lightcoral;
+    background-color: #313638;
     display: flex;
-    width: 45%;
+    width: 65%;
     height: 60%;
     flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
+    border-radius: 4%;
+}
+
+#quizSpace h2 {
+    text-decoration: underline;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
 }
 
 #question {
     display: flex;
     text-align: center;
+    text-decoration: none;
 }
 
 #answers p {
     display: flex;
-    background-color: lightgreen;
-    width: 100%;
+    background-color: rgb(161, 161, 231);
+    color: black;
+    width: 65%;
     height: 20%;
     align-items: center;
     justify-content: center;
     border-radius: 25px;
+    border: solid black;
     font-size: 25px;
     font-family:'Times New Roman', Times, serif;
 }
@@ -64,6 +79,7 @@ body {
     align-items: center;
     justify-content: center;
     align-items: center;
+    border-radius: 20%;
 }
 
 #startButton:hover {
@@ -74,6 +90,9 @@ body {
     text-align: center;
     font-family: monospace;
     font-size: larger;
+    border: dashed 4px black;
+    margin-top: 10px;
+    padding: 2px;
 }
 
 #highScorePage {
@@ -93,12 +112,6 @@ body {
     display: none;
     align-items: center;
     justify-content: center;
-}
-
-#leaderboard {
-    border-collapse: collapse;
-    width: 50%;
-    background-color: darkgoldenrod;
 }
 
 #playAgain {
@@ -126,6 +139,7 @@ body {
 @media screen and (max-width: 768px) {
     header {
       flex-direction: column;
+      flex-wrap: wrap;
     }
   
     main {

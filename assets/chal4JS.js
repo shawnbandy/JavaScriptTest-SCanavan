@@ -71,7 +71,7 @@ var score = 0;
 var globalScore = 0;
 
 //*time given to user to take test
-var timer = 50;
+var timer = 1000000;
 
 //*this will start the test upon clicking the button, which hides the button and displays the test
 //*then takeTest function is ran
@@ -159,6 +159,7 @@ function decreaseTimer(){
 
 var userName = ""
 function displayHighScore(){
+    //*hides the quiz page and displays the high score page
     startButton.setAttribute("style", "display: none");
     descriptionEl.setAttribute("style", "display: none");
     quizSpace.setAttribute("style", "display: none");
@@ -167,6 +168,8 @@ function displayHighScore(){
     highScoreDisplay.setAttribute("style", "display: flex;");
     scoreReport.textContent = score + " out of 10.";
 
+
+    //*displays the current high score from the local storage, unless there is none
     if (localStorage.getItem("globalScore") == null){
         globalScoreReport.textContent = "There was no previous high score."
     }else{
@@ -174,12 +177,13 @@ function displayHighScore(){
     }
     localStorage.setItem("score", score);
 
+    //*if your score is higher than high score, we set the high score to your score, update the page, and store your score in localStorage
     if (score > localStorage.getItem("globalScore")){
         globalScore = score;
-      
         localStorage.setItem("globalScore", globalScore);
         beatEl.textContent = "You beat the high score!";
         scoreUpdateEl.setAttribute("style", "display: flex");
+        //*gets the user's name
         var userName = prompt("Congratulations! Please enter your initials for the leaderboard");
         localStorage.setItem("currentChamp", userName);
         userNameEl.textContent = "Current high score belongs to: " + userName + " with a score of " + localStorage.getItem("globalScore");
@@ -188,6 +192,7 @@ function displayHighScore(){
         
     }
 
+    //*lets you play again
     playAgainButton.addEventListener("click", function(){
         document.location.reload(); 
     })
