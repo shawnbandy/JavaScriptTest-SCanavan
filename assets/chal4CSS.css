@@ -118,6 +118,10 @@ body {
     opacity: 80%;
 }
 
+#userForm {
+    display: none;
+}
+
 
 @media screen and (max-width: 768px) {
     header {

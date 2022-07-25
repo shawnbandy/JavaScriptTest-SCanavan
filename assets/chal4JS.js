@@ -14,9 +14,7 @@ var globalScoreReport = document.getElementById("globalScore");
 var beatEl = document.getElementById("beat");
 var scoreUpdateEl =  document.getElementById("scoreUpdate");
 var questionNumberEl = document.getElementById("questionNumber");
-var firstPlaceDisplay = document.getElementById("firstPlace")
-var secondPlaceDisplay = document.getElementById("secondPlace")
-var thirdPlaceDisplay = document.getElementById("thirdPlace")
+var userNameEl = document.getElementById("userName");
 
 var playAgainButton = document.getElementById("playAgain");
 
@@ -168,17 +166,27 @@ function displayHighScore(){
 
     highScoreDisplay.setAttribute("style", "display: flex;");
     scoreReport.textContent = score + " out of 10.";
-    globalScoreReport.textContent = "Here is the current high score: " + localStorage.getItem("globalScore");
+
+    if (localStorage.getItem("globalScore") == null){
+        globalScoreReport.textContent = "There was no previous high score."
+    }else{
+        globalScoreReport.textContent = "Here is the current high score: " + localStorage.getItem("globalScore");
+    }
     localStorage.setItem("score", score);
 
     if (score > localStorage.getItem("globalScore")){
         globalScore = score;
+      
         localStorage.setItem("globalScore", globalScore);
         beatEl.textContent = "You beat the high score!";
         scoreUpdateEl.setAttribute("style", "display: flex");
         var userName = prompt("Congratulations! Please enter your initials for the leaderboard");
-    } 
-    leaderboard();
+        localStorage.setItem("currentChamp", userName);
+        userNameEl.textContent = "Current high score belongs to: " + userName + " with a score of " + localStorage.getItem("globalScore");
+    }else{
+        userNameEl.textContent = "Current high score belongs to: " + localStorage.getItem("currentChamp") + " with a score of " + localStorage.getItem("globalScore");
+        
+    }
 
     playAgainButton.addEventListener("click", function(){
         document.location.reload(); 
@@ -187,54 +195,5 @@ function displayHighScore(){
 }
 
 
-var firstPlace = 0;
-var secondPlace = 0;
-var thirdPlace = 0;
-var firstPlaceUser = "JOE"
-var secondPlaceUser = "BOA"
-var thirdPlaceUser = "SIP"
 
-function leaderboard(){
 
-    var threeCharUserName;
-    if (userName.length > 3){
-        for (var i = 0; i < 4; i++){
-            threeCharUserName += userName[i];
-        }
-        return threeCharUserName;
-    }else if (userName.length == 0) {
-        threeCharUserName = "AAA"
-    }else {
-        threeCharUserName = userName;
-    }
-
-    switch (score){
-        case score > firstPlace :
-            thirdPlace = secondPlace;
-                thirdPlaceUser = secondPlaceUser;
-            secondPlace = firstPlace;
-                secondPlaceUser = firstPlaceUser;
-            firstPlace = score;
-                firstPlaceUser = threeCharUserName;
-            break;
-        case score > secondPlace :
-            thirdPlace = secondPlace;
-                thirdPlaceUser = secondPlaceUser;
-            secondPlace = score;
-                secondPlaceUser = threeCharUserName;
-            break;
-        case score > thirdPlace :
-            thirdPlace = score;
-                thirdPlaceUser = threeCharUserName;
-            break;
-    }
-
-    firstPlaceDisplay.children[0].textContent = firstPlaceUser;
-    firstPlaceDisplay.children[1].textContent = firstPlace;
-    secondPlaceDisplay.children[0].textContent = secondPlaceUser;
-    secondPlaceDisplay.children[1].textContent = secondPlace;
-    thirdPlaceDisplay.children[0].textContent = thirdPlaceUser;
-    thirdPlaceDisplay.children[1].textContent = thirdPlace;
-
-    
-}
