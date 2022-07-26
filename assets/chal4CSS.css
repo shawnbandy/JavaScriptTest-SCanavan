@@ -96,12 +96,20 @@ body {
 }
 
 #highScorePage {
+    height: 80%;
     display: none;
     flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
     font-family: 'Times New Roman', Times, serif;
+}
+
+#highScorePage div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
 }
 
 #score {
@@ -121,7 +129,7 @@ body {
     font-size: larger;
     cursor: pointer;
     width: 50%;
-    height: 100%;
+    height: 10%;
     align-items: center;
     justify-content: center;
     align-items: center;
@@ -131,9 +139,42 @@ body {
     opacity: 80%;
 }
 
-#userForm {
+#joinForm {
     display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 }
+
+#highScoreList {
+    list-style: none;
+    padding: 0;
+    border: solid black 1px;
+    width: 100%;
+}
+
+#highScoreList li:nth-child(odd) {
+    background-color: rgb(183, 188, 196);
+}
+
+#join {
+    background-color: lightcoral;
+    display: flex;
+    padding: 0;
+    width: 90%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: solid black 2px;
+}
+
+#join:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
 
 
 @media screen and (max-width: 768px) {

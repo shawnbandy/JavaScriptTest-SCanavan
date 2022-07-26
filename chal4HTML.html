@@ -42,13 +42,16 @@
             <div>
                 <p style="font-size: 30px;">Great Job! Here is your score: </p>
                 <p id="score">Text</p>
-                <p id="globalScore"></p>
-                <p id="beat">You did not beat them</p>
-                <p id="scoreUpdate">Updated new High Score. It is now yours!</p>
-                <p id="userName">Text</p>
+                <p>Leaderboard:</p>
+                <ul id="highScoreList"></ul>
+                <form id="joinForm">
+                    <input placeholder="Enter Your Name" id="userInitials"/><br>
+                    <button id="join" type="text" placeholder="Enter Your Name" style="text-align: center;">Submit to view the Leaderboard</button>
+                </form>
+                <button id="playAgain">Play Again?</button>
             </div>
 
-            <button id="playAgain">Play Again?</button>
+            
         </section>
 
         <div id="description">

@@ -10,11 +10,12 @@ var descriptionEl = document.getElementById("description");
 var rightOrWrongDisplay = document.getElementById("rightOrWrong");
 var highScoreDisplay = document.getElementById("highScorePage");
 var scoreReport = document.getElementById("score");
-var globalScoreReport = document.getElementById("globalScore");
 var beatEl = document.getElementById("beat");
-var scoreUpdateEl =  document.getElementById("scoreUpdate");
 var questionNumberEl = document.getElementById("questionNumber");
 var userNameEl = document.getElementById("userName");
+var joinFormEl = document.getElementById("joinForm");
+var submitButtonEl = document.getElementById("join");
+var userInitialsEl = document.getElementById("userInitials");
 
 var playAgainButton = document.getElementById("playAgain");
 
@@ -71,7 +72,7 @@ var score = 0;
 var globalScore = 0;
 
 //*time given to user to take test
-var timer = 1000000;
+var timer = 80;
 
 //*this will start the test upon clicking the button, which hides the button and displays the test
 //*then takeTest function is ran
@@ -165,31 +166,25 @@ function displayHighScore(){
     quizSpace.setAttribute("style", "display: none");
     document.querySelector("header").setAttribute("style", "display: none");
 
-    highScoreDisplay.setAttribute("style", "display: flex;");
+
     scoreReport.textContent = score + " out of 10.";
+    
+    var minimumScore = JSON.parse(localStorage.getItem("thirdPlace"))
 
-
-    //*displays the current high score from the local storage, unless there is none
-    if (localStorage.getItem("globalScore") == null){
-        globalScoreReport.textContent = "There was no previous high score."
+    //*if your score is higher than the lowest score, we add it to local storage
+    if (score > 0){ 
+        joinFormEl.setAttribute("style", "display: flex");
+        submitButtonEl.addEventListener("click", function(event){
+            event.preventDefault();
+            var userInit = submitButton();
+            checkYourScore(userInit, score);
+            makeLeaderboard();
+            submitButtonEl.disabled = true;
+        });
+        highScoreDisplay.setAttribute("style", "display: flex;");
     }else{
-        globalScoreReport.textContent = "Here is the current high score: " + localStorage.getItem("globalScore");
-    }
-    localStorage.setItem("score", score);
-
-    //*if your score is higher than high score, we set the high score to your score, update the page, and store your score in localStorage
-    if (score > localStorage.getItem("globalScore")){
-        globalScore = score;
-        localStorage.setItem("globalScore", globalScore);
-        beatEl.textContent = "You beat the high score!";
-        scoreUpdateEl.setAttribute("style", "display: flex");
-        //*gets the user's name
-        var userName = prompt("Congratulations! Please enter your initials for the leaderboard");
-        localStorage.setItem("currentChamp", userName);
-        userNameEl.textContent = "Current high score belongs to: " + userName + " with a score of " + localStorage.getItem("globalScore");
-    }else{
-        userNameEl.textContent = "Current high score belongs to: " + localStorage.getItem("currentChamp") + " with a score of " + localStorage.getItem("globalScore");
-        
+        makeLeaderboard();
+        highScoreDisplay.setAttribute("style", "display: flex;");
     }
 
     //*lets you play again
@@ -198,6 +193,85 @@ function displayHighScore(){
     })
 
 }
+
+function makeLeaderboard(){
+    //*this function creates the list element, parses the object into a var, then sets the text of the list to the its owner
+    var firstList = document.createElement("li")
+    var secondList = document.createElement("li")
+    var thirdList = document.createElement("li")
+
+    var first = JSON.parse(localStorage.getItem("firstPlace"))
+    var second = JSON.parse(localStorage.getItem("secondPlace"))
+    var third = JSON.parse(localStorage.getItem("thirdPlace"))
+
+
+    firstList.innerText = first.name + " " + first.score
+    secondList.innerText = second.name + " " + second.score
+    thirdList.innerText = third.name + " " + third.score
+
+    document.getElementById("highScoreList").appendChild(firstList);
+    document.getElementById("highScoreList").appendChild(secondList);
+    document.getElementById("highScoreList").appendChild(thirdList);
+}
+
+//*dummy values
+var userCole = {
+    name: "", 
+    score: ""
+}
+var userBrad = {
+    name: "", 
+    score: ""
+}
+var userAmy = {
+    name: "", 
+    score: ""
+}
+
+//*putting these two in here just as a test
+var storedNamesRetrieve = JSON.parse(localStorage.getItem("storedNames"));
+if (storedNamesRetrieve == null) {storedNamesRetrieve = [userCole, userBrad, userAmy];}
+
+function checkYourScore(userName, userScore){
+    //*this function takes all of the objects, sorts them in the array by score, then stores them 
+    //call it, change it, store it
+    
+    var userUser = {
+        name: "", 
+        score: 0
+    }
+
+    userUser.name = userName;
+    userUser.score = userScore;
+    storedNamesRetrieve.push(userUser);
+    
+    localStorage.setItem("storedNames", JSON.stringify(storedNamesRetrieve));
+
+    storedNamesRetrieve.sort((a, b) => b.score - a.score);
+
+
+    localStorage.setItem("firstPlace", JSON.stringify(storedNamesRetrieve[0]));
+    localStorage.setItem("secondPlace", JSON.stringify(storedNamesRetrieve[1]));
+    localStorage.setItem("thirdPlace", JSON.stringify(storedNamesRetrieve[2]));
+}
+
+
+
+//*this function gets the name the user inputs into the form, and then returns AAA as default or whatever they put in
+function submitButton(){
+    var userInitials = userInitialsEl.value;
+    if (!userInitials){
+        userInitials = "AAA";
+    }
+    return userInitials;
+}
+
+
+
+
+
+
+
 
 
 
