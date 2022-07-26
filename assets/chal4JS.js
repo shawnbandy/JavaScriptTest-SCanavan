@@ -172,7 +172,7 @@ function displayHighScore(){
     var minimumScore = JSON.parse(localStorage.getItem("thirdPlace"))
 
     //*if your score is higher than the lowest score, we add it to local storage
-    if (score > 0){ 
+    if (score >= 0){ 
         joinFormEl.setAttribute("style", "display: flex");
         submitButtonEl.addEventListener("click", function(event){
             event.preventDefault();
@@ -180,6 +180,7 @@ function displayHighScore(){
             checkYourScore(userInit, score);
             makeLeaderboard();
             submitButtonEl.disabled = true;
+            joinFormEl.setAttribute("style", "display: none");
         });
         highScoreDisplay.setAttribute("style", "display: flex;");
     }else{
