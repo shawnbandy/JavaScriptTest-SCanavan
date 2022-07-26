@@ -135,7 +135,7 @@ function takeTest(){
     decreaseTimer();
 }
 
-//*function sill decrease the timer variable every 100ms and display time remaining to user
+//*function sill decreases the timer variable every 1000ms and display time remaining to user
 //*when timer reaches 0, the final screen is displayed
 function decreaseTimer(){
     var timeInterval = setInterval(function(){
@@ -160,7 +160,7 @@ function decreaseTimer(){
 
 var userName = ""
 function displayHighScore(){
-    //*hides the quiz page and displays the high score page
+    //*hides the quiz page elements and displays the high score page elements
     startButton.setAttribute("style", "display: none");
     descriptionEl.setAttribute("style", "display: none");
     quizSpace.setAttribute("style", "display: none");
@@ -168,10 +168,8 @@ function displayHighScore(){
 
 
     scoreReport.textContent = score + " out of 10.";
-    
-    var minimumScore = JSON.parse(localStorage.getItem("thirdPlace"))
 
-    //*if your score is higher than the lowest score, we add it to local storage
+    //*puts your score into the local storage. Only displays if it's high enough to beat out others
     if (score >= 0){ 
         joinFormEl.setAttribute("style", "display: flex");
         submitButtonEl.addEventListener("click", function(event){
@@ -229,14 +227,14 @@ var userAmy = {
     score: ""
 }
 
-//*putting these two in here just as a test
+//*pulls the usernames from the localstorage, or sets an initial 3 dummy values 
 var storedNamesRetrieve = JSON.parse(localStorage.getItem("storedNames"));
 if (storedNamesRetrieve == null) {storedNamesRetrieve = [userCole, userBrad, userAmy];}
 
 function checkYourScore(userName, userScore){
-    //*this function takes all of the objects, sorts them in the array by score, then stores them 
-    //call it, change it, store it
+    //*this function takes all of the objects, sorts them in the array by score, then stores them in localstorage
     
+    //*sets this object blank everytime this is ran, then assigns the arguements into it
     var userUser = {
         name: "", 
         score: 0
@@ -244,13 +242,13 @@ function checkYourScore(userName, userScore){
 
     userUser.name = userName;
     userUser.score = userScore;
-    storedNamesRetrieve.push(userUser);
-    
-    localStorage.setItem("storedNames", JSON.stringify(storedNamesRetrieve));
 
+    //*adds it to the array, stores everything in localStorage, then sorts the array
+    storedNamesRetrieve.push(userUser);
+    localStorage.setItem("storedNames", JSON.stringify(storedNamesRetrieve));
     storedNamesRetrieve.sort((a, b) => b.score - a.score);
 
-
+    //*sets these for the makeLeaderBoard function
     localStorage.setItem("firstPlace", JSON.stringify(storedNamesRetrieve[0]));
     localStorage.setItem("secondPlace", JSON.stringify(storedNamesRetrieve[1]));
     localStorage.setItem("thirdPlace", JSON.stringify(storedNamesRetrieve[2]));
@@ -261,8 +259,15 @@ function checkYourScore(userName, userScore){
 //*this function gets the name the user inputs into the form, and then returns AAA as default or whatever they put in
 function submitButton(){
     var userInitials = userInitialsEl.value;
-    if (!userInitials){
+    if (!userInitials ){
         userInitials = "AAA";
+    }
+    if (userInitials.length > 3){
+        holderInitials = "";
+        for (var i = 0; i < 3; i++){
+            holderInitials += userInitials[i]
+        }
+        userInitials = holderInitials;
     }
     return userInitials;
 }

@@ -12,4 +12,4 @@ This was accomplished by;
 3. Questions are given to the user, and when answered, a new question is displayed 
 4. When an incorrect answer is selected, time is subtracted and "incorrect" is displayed" 
 5. Game over screen occurs when everything is answered or timer hits 0
-6. User is prompted to enter their initials when they make a high score 
+6. User is prompted to enter their initials and see the high score. If they have a score that is high enough to go on the leaderboard, it will be displayed
