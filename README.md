@@ -23,4 +23,3 @@ Linked to Repo: https://github.com/shawnbandy/JavaScriptTest-SCanavan
 ![](6o2867.gif)
 
 ![image description](/assets/img/6o2867.gif)
-<img src="/assets/img/6o2867.gif" width="128"/>
