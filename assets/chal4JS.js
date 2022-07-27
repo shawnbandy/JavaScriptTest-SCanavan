@@ -69,7 +69,6 @@ var correctAnswersIndex = 0;
 
 //*tally of the score
 var score = 0;
-var globalScore = 0;
 
 //*time given to user to take test
 var timer = 80;
@@ -158,7 +157,6 @@ function decreaseTimer(){
 }
 
 
-var userName = ""
 function displayHighScore(){
     //*hides the quiz page elements and displays the high score page elements
     startButton.setAttribute("style", "display: none");
@@ -234,7 +232,7 @@ if (storedNamesRetrieve == null) {storedNamesRetrieve = [userCole, userBrad, use
 function checkYourScore(userName, userScore){
     //*this function takes all of the objects, sorts them in the array by score, then stores them in localstorage
     
-    //*sets this object blank everytime this is ran, then assigns the arguements into it
+    //*sets this object blank everytime this is ran, then assigns the arguments into it
     var userUser = {
         name: "", 
         score: 0
@@ -248,7 +246,7 @@ function checkYourScore(userName, userScore){
     localStorage.setItem("storedNames", JSON.stringify(storedNamesRetrieve));
     storedNamesRetrieve.sort((a, b) => b.score - a.score);
 
-    //*sets these for the makeLeaderBoard function
+    //*sets these for the makeLeaderBoard function, since these will be the top three scoring objects
     localStorage.setItem("firstPlace", JSON.stringify(storedNamesRetrieve[0]));
     localStorage.setItem("secondPlace", JSON.stringify(storedNamesRetrieve[1]));
     localStorage.setItem("thirdPlace", JSON.stringify(storedNamesRetrieve[2]));

@@ -16,6 +16,11 @@ This was accomplished by;
 
 Application Description: This application runs a JS test when the user presses the button to start the quiz. The user is given a test that cycles through 10 different question, with 4 different answers per question, a question number, and a timer. Upon answering the question, the next question/answer are displayed, and the user is notified if their answer was correct or incorrect. If incorrect, 5 seconds will be subtracted from the timer. After answering the final question, or if their timer reaches 0, the quiz ends, with the user's score (calculated by number of questions that are answered correct) displayed. The user is given the option to type in their initials and submit to view the leaderboard. If the user score high enough, their initials and score are placed onto the leaderboard and stored into localStorage. The leaderboard only holds 3 high scores and is arranged in descending order from every attempt. 
 
+<<<<<<< HEAD
 Link to deployed application: https://shawnbandy.github.io/JavaScriptTest-SCanavan/
 
 I
+=======
+Linked to Deployed Application: https://shawnbandy.github.io/JavaScriptTest-SCanavan/chal4HTML
+Linked to Repo: https://github.com/shawnbandy/JavaScriptTest-SCanavan
+>>>>>>> c35d2fac8230cfb79fd379eb761e151134761540
